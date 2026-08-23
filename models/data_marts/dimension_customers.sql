@@ -17,20 +17,13 @@ customer_orders as (
         min(order_date) as first_order_date,
         max(order_date) as most_recent_order_date,
         count(order_id) as number_of_orders,
-        sum(amount) as lifetime_value
+        sum(amount)/100 as lifetime_value
 
     from orders
 
     group by 1
 
 ),
--- customer_lifetime_value as(
---     select orders.customer_id,
---     sum(payments.amount) as lifetime_value,
---     from orders
---     left join payments on orders.order_id=payments.order_id
---     group by 1
--- ),
 
 final as (
 
